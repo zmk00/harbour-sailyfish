@@ -1,8 +1,0 @@
-[Desktop Entry]
-Type=Application
-X-Nemo-Application-Type=silica-qt5
-Name=Saily Fish
-Icon=harbour-sailyfish
-Exec=harbour-sailyfish
-
-X-Desktop-File-Install-Version=0.20

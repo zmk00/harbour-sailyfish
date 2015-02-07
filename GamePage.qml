@@ -1,5 +1,6 @@
-import QtQuick         2.0
-import Sailfish.Silica 1.0
+import QtQuick          2.0
+import QtQuick.Controls 1.2
+//import "qrc:/"
 
 Page{
     id: page
@@ -11,8 +12,9 @@ Page{
     }
 
     property bool paused:    false
-    property bool appActive: applicationActive
-    onAppActiveChanged: if (!appActive && alive) paused = true
+    //Need a fix for this, but not right now.
+    //property bool appActive: applicationActive
+    //onAppActiveChanged: if (!appActive && alive) paused = true
 
     property double velo:  0
     property double grav:  9.8
@@ -51,7 +53,7 @@ Page{
 
     onMainResetHighscoreChanged:{
 
-        labelHighscore.color = Theme.secondaryColor
+        labelHighscore.color = "gray"
         highscore            = 0
     }
 
@@ -68,7 +70,7 @@ Page{
         if (score > highscore){
 
             highscore = score
-            labelHighscore.color = Theme.highlightColor
+            labelHighscore.color = "red"
             newHighscore.restart()
         }
     }
@@ -77,13 +79,13 @@ Page{
 
     Component.onCompleted:{
 
-        storage.initalize()
+//        storage.initalize()
 
-        var got = storage.getSetting("highscore")
-        if (got === null)
-            got = 0
+//        var got = storage.getSetting("highscore")
+//        if (got === null)
+//            got = 0
 
-        highscore = got*1
+//        highscore = got*1
 
         player.y = page.height//(page.height /2) - (player.height /2)
         player.x = (page.width  /2) - (player.width  /2)
@@ -91,13 +93,15 @@ Page{
 
     function updateSettings(){
 
-        storage.setSetting("highscore", settingHighscore)
-        storage.setSetting("time",      storage.getSetting("time")     +settingTime)
-        storage.setSetting("restarts",  storage.getSetting("restarts") +settingRestarts)
-        storage.setSetting("jumps",     storage.getSetting("jumps")    +settingJumps)
-        storage.setSetting("total",     storage.getSetting("total")    +settingTotal)
-        storage.setSetting("distance",  storage.getSetting("distance") +settingDistance)
-        storage.setSetting("bubbles",   storage.getSetting("bubbles")  +settingBubbles)
+        return
+
+//        storage.setSetting("highscore", settingHighscore)
+//        storage.setSetting("time",      storage.getSetting("time")     +settingTime)
+//        storage.setSetting("restarts",  storage.getSetting("restarts") +settingRestarts)
+//        storage.setSetting("jumps",     storage.getSetting("jumps")    +settingJumps)
+//        storage.setSetting("total",     storage.getSetting("total")    +settingTotal)
+//        storage.setSetting("distance",  storage.getSetting("distance") +settingDistance)
+//        storage.setSetting("bubbles",   storage.getSetting("bubbles")  +settingBubbles)
     }
 
     function restart(){
@@ -180,9 +184,9 @@ Page{
 
         settingTotal += score
 
-        var best = settingBest + score
-        if (best > storage.getSetting("best"))
-            storage.setSetting("best", best)
+//        var best = settingBest + score
+//        if (best > storage.getSetting("best"))
+//            storage.setSetting("best", best)
         settingBest = 0
 
         var pipe         = pipeHolder.children[0]
@@ -248,8 +252,8 @@ Page{
         target:   labelScoreInt
         property: "font.pixelSize"
         duration: 500
-        from:     Theme.fontSizeExtraLarge
-        to:       Theme.fontSizeLarge
+        from:     30
+        to:       24
     }
 
     NumberAnimation{
@@ -258,13 +262,13 @@ Page{
         target:   labelHighscoreInt
         property: "font.pixelSize"
         duration: 500
-        from:     Theme.fontSizeLarge * 2
-        to:       Theme.fontSizeLarge
+        from:     24 * 2
+        to:       24
 
         onRunningChanged:{
 
             if (!running)
-                newHighscore.from = Theme.fontSizeExtraLarge
+                newHighscore.from = 30
         }
     }
 
@@ -312,17 +316,19 @@ Page{
         }
     }
 
-    Storage{
-        id: storage
-    }
+//    Not sure android for qt has the local database plugin
+//    Storage{
+//        id: storage
+//    }
 
-    SilicaFlickable{
+    /*Silica*/Flickable{
 
         anchors.fill: parent
 
         contentHeight: page.height
         contentWidth:  page.width
 
+/*      Leave it for now, need a proper menusystem
         PullDownMenu{
 
             enabled:     !alive
@@ -347,6 +353,7 @@ Page{
                 }
             }
         }
+*/
 
         Item{
             id: player
@@ -375,13 +382,13 @@ Page{
             Rectangle{
                 id: highlightColor
 
-                color:   Theme.highlightColor
+                color:   "red"
                 visible: false
             }
             Rectangle{
                 id: secondaryHighlightColor
 
-                color:   Theme.secondaryHighlightColor
+                color:   "orange"
                 visible: false
             }
 
@@ -475,9 +482,9 @@ Page{
                 height: width
                 radius: width
 
-                color: Theme.primaryColor
+                color: "white"
 
-                border.color: Theme.highlightColor
+                border.color: "red"
                 border.width: 3
 
                 antialiasing: true
@@ -497,7 +504,7 @@ Page{
                     height: width
                     radius: width
 
-                    color: Theme.secondaryHighlightColor
+                    color: "orange"
 
                     anchors.centerIn: parent
 
@@ -576,8 +583,8 @@ Page{
 
             anchors.centerIn: parent
 
-            color:               Theme.highlightColor
-            font.pixelSize:      Theme.fontSizeExtraLarge
+            color:               "red"
+            font.pixelSize:      30
             font.bold:           true
             horizontalAlignment: Text.horizontalAlignment
 
@@ -621,8 +628,8 @@ Page{
 
             anchors.centerIn: parent
 
-            color:          Theme.highlightColor
-            font.pixelSize: Theme.fontSizeExtraLarge
+            color:          "red"
+            font.pixelSize: 30
             font.bold:      true
             opacity:        0
 
@@ -645,20 +652,20 @@ Page{
             Label{
                 id: labelScore
 
-                x: Theme.paddingLarge; y: Theme.paddingLarge
+                x: 21; y: 21
 
-                color:          Theme.secondaryColor
-                font.pixelSize: Theme.fontSizeLarge
+                color:          "gray"
+                font.pixelSize: 24
 
                 text: "Score"
             }
             Label{
                 id: labelScoreInt
 
-                x: Theme.paddingLarge; y: labelScore.y+labelScore.height
+                x: 21; y: labelScore.y+labelScore.height
 
-                color:               Theme.primaryColor
-                font.pixelSize:      Theme.fontSizeLarge
+                color:               "white"
+                font.pixelSize:      24
                 font.bold:           true
 
                 text: score
@@ -667,20 +674,20 @@ Page{
             Label{
                 id: labelHighscore
 
-                x: (page.width - Theme.paddingLarge) -width; y: Theme.paddingLarge
+                x: (page.width - 21) -width; y: 21
 
-                color:               Theme.secondaryColor
-                font.pixelSize:      Theme.fontSizeLarge
+                color:               "gray"
+                font.pixelSize:      24
 
                 text: "Highscore"
             }
             Label{
                 id: labelHighscoreInt
 
-                x: (page.width - Theme.paddingLarge) -width; y: labelHighscore.y+labelHighscore.height
+                x: (page.width - 21) -width; y: labelHighscore.y+labelHighscore.height
 
-                color:               Theme.primaryColor
-                font.pixelSize:      Theme.fontSizeLarge
+                color:               "white"
+                font.pixelSize:      24
                 font.bold:           true
 
                 text: highscore
@@ -712,9 +719,9 @@ Page{
             anchors{
 
                 right:        parent.right
-                rightMargin:  Theme.paddingMedium
+                rightMargin:  14
                 bottom:       parent.bottom
-                bottomMargin: Theme.paddingMedium
+                bottomMargin: 14
             }
 
             spacing: -5
@@ -722,14 +729,14 @@ Page{
             Label{
 
                 text:           "Created by Felix Woxström"
-                color:          Theme.highlightColor
-                font.pixelSize: Theme.fontSizeMedium
+                color:          "red"
+                font.pixelSize: 18
             }
             Label{
 
                 text:           "fwoxstrom@gmail.com"
-                color:          Theme.secondaryHighlightColor
-                font.pixelSize: Theme.fontSizeSmall
+                color:          "orange"
+                font.pixelSize: 12
 
                 anchors.right: parent.right
             }

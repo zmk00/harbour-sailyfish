@@ -1,12 +1,12 @@
-import QtQuick         2.0
-import Sailfish.Silica 1.0
+import QtQuick          2.0
+import QtQuick.Controls 1.2
 
 Rectangle {
     id: rect
 
     y: page.height
 
-    color:  Theme.secondaryColor
+    color:  "gray"
     radius: width /2
     height: width
 

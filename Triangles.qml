@@ -1,5 +1,5 @@
-import QtQuick 2.0
-import Sailfish.Silica 1.0
+import QtQuick          2.0
+import QtQuick.Controls 1.2
 
 Page{
     id: page
@@ -121,13 +121,13 @@ Page{
         Rectangle{
             id: highlightColor
 
-            color:   Theme.highlightColor
+            color:   "red"
             visible: false
         }
         Rectangle{
             id: secondaryHighlightColor
 
-            color:   Theme.secondaryHighlightColor
+            color:   "orange"
             visible: false
         }
 
@@ -220,9 +220,9 @@ Page{
             height: width
             radius: width
 
-            color: Theme.primaryColor
+            color: "white"
 
-            border.color: Theme.highlightColor
+            border.color: "red"
             border.width: 3
 
             antialiasing: true
@@ -242,7 +242,7 @@ Page{
                 height: width
                 radius: width
 
-                color: Theme.secondaryHighlightColor
+                color: "orange"
 
                 anchors.centerIn: parent
 

@@ -1,9 +1,9 @@
-import QtQuick         2.0
-import Sailfish.Silica 1.0
+import QtQuick          2.0
+import QtQuick.Controls 1.2
 
 Canvas{
 
-    property color color: Theme.secondaryColor
+    property color color: "gray"
 
     //antialiasing: true
     //smooth:       true

@@ -1,5 +1,5 @@
-import QtQuick         2.0
-import Sailfish.Silica 1.0
+import QtQuick          2.0
+import QtQuick.Controls 1.2
 
 Item{
     id: item
@@ -30,15 +30,15 @@ Item{
 
             Rectangle{
 
-                color: Theme.secondaryHighlightColor
-                width: page.width /5
+                color: "orange"
+                width:  page.width /5
                 height: page.height
 
                 anchors.horizontalCenter: parent.horizontalCenter
             }
             Rectangle{
 
-                color:  Theme.secondaryHighlightColor
+                color:  "orange"
                 width:  (page.width /5) + (height *2)
                 height: 20
 
@@ -60,7 +60,7 @@ Item{
 
             Rectangle{
 
-                color:  Theme.secondaryHighlightColor
+                color:  "orange"
                 width:  (page.width /5) + (height *2)
                 height: 20
 
@@ -69,7 +69,7 @@ Item{
 
             Rectangle{
 
-                color: Theme.secondaryHighlightColor
+                color: "orange"
                 width: page.width /5
                 height: page.height
 

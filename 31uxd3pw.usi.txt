@@ -1,0 +1,47 @@
+﻿
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch plainqt
+# Changes to be committed:
+#	deleted:    .gitattributes
+#	deleted:    .gitignore
+#	deleted:    Makefile
+#	deleted:    harbour-sailyfish
+#	deleted:    harbour-sailyfish.desktop
+#	deleted:    harbour-sailyfish.o
+#	deleted:    harbour-sailyfish.png
+#	deleted:    harbour-sailyfish.pro
+#	deleted:    harbour-sailyfish.pro.user
+#	deleted:    qml/CoverPage.qml
+#	deleted:    qml/GamePage.qml
+#	deleted:    qml/Storage.qml
+#	deleted:    qml/Triangle.qml
+#	deleted:    qml/Triangles.qml
+#	deleted:    qml/aboutPage.qml
+#	deleted:    qml/harbour-sailyfish.qml
+#	deleted:    qml/itemBubble.qml
+#	deleted:    qml/itemPipe.qml
+#	deleted:    qml/statsPage.qml
+#	deleted:    rpm/harbour-sailyfish.changes.in
+#	deleted:    rpm/harbour-sailyfish.spec
+#	deleted:    rpm/harbour-sailyfish.yaml
+#	deleted:    src/harbour-sailyfish.cpp
+#
+# Untracked files:
+#	GamePage.qml
+#	Page.qml
+#	Storage.qml
+#	Triangle.qml
+#	Triangles.qml
+#	aboutPage.qml
+#	android-sailyfish.pro
+#	android-sailyfish.pro.user
+#	deployment.pri
+#	itemBubble.qml
+#	itemPipe.qml
+#	main.cpp
+#	main.qml
+#	qml.qrc
+#	statsPage.qml
+#
+
