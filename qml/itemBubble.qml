@@ -1,12 +1,17 @@
 import QtQuick          2.0
 import QtQuick.Controls 1.2
+import "qrc:/qml/"
 
 Rectangle {
     id: rect
 
+    Theme{
+        id: theme
+    }
+
     y: page.height
 
-    color:  "gray"
+    color:  theme.secondaryColor
     radius: width /2
     height: width
 

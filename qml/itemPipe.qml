@@ -1,5 +1,6 @@
 import QtQuick          2.0
 import QtQuick.Controls 1.2
+import "qrc:/qml/"
 
 Item{
     id: item
@@ -9,6 +10,10 @@ Item{
 
     x: page.width
     y: page.height /2
+
+    Theme{
+        id: theme
+    }
 
     Component.onCompleted:{
 
@@ -30,15 +35,15 @@ Item{
 
             Rectangle{
 
-                color: "orange"
-                width:  page.width /5
+                color: theme.secondaryHighlightColor
+                width: page.width /5
                 height: page.height
 
                 anchors.horizontalCenter: parent.horizontalCenter
             }
             Rectangle{
 
-                color:  "orange"
+                color:  theme.secondaryHighlightColor
                 width:  (page.width /5) + (height *2)
                 height: 20
 
@@ -60,7 +65,7 @@ Item{
 
             Rectangle{
 
-                color:  "orange"
+                color:  theme.secondaryHighlightColor
                 width:  (page.width /5) + (height *2)
                 height: 20
 
@@ -69,7 +74,7 @@ Item{
 
             Rectangle{
 
-                color: "orange"
+                color: theme.secondaryHighlightColor
                 width: page.width /5
                 height: page.height
 

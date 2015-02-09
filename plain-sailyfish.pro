@@ -2,7 +2,8 @@ TEMPLATE = app
 
 QT += qml quick widgets
 
-SOURCES += main.cpp
+SOURCES += \
+    src/harbour-sailyfish.cpp
 
 RESOURCES += qml.qrc
 

@@ -3,7 +3,11 @@ import QtQuick.Controls 1.2
 
 Canvas{
 
-    property color color: "gray"
+    Theme{
+        id: theme
+    }
+
+    property color color: theme.secondaryColor
 
     //antialiasing: true
     //smooth:       true

@@ -7,6 +7,10 @@ Page{
     property double angle: 0
     property double max:   29.4
 
+    theme{
+        id: theme
+    }
+
     Timer{
         interval: 60
         repeat:   true
@@ -121,13 +125,13 @@ Page{
         Rectangle{
             id: highlightColor
 
-            color:   "red"
+            color:   theme.highlightColor
             visible: false
         }
         Rectangle{
             id: secondaryHighlightColor
 
-            color:   "orange"
+            color:   theme.secondaryHighlightColor
             visible: false
         }
 
@@ -220,9 +224,9 @@ Page{
             height: width
             radius: width
 
-            color: "white"
+            color: theme.primaryColor
 
-            border.color: "red"
+            border.color: theme.highlightColor
             border.width: 3
 
             antialiasing: true
@@ -242,7 +246,7 @@ Page{
                 height: width
                 radius: width
 
-                color: "orange"
+                color: theme.secondaryHighlightColor
 
                 anchors.centerIn: parent
 

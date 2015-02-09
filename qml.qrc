@@ -1,14 +1,16 @@
 <RCC>
     <qresource prefix="/">
-        <file>aboutPage.qml</file>
-        <file>GamePage.qml</file>
-        <file>itemBubble.qml</file>
-        <file>itemPipe.qml</file>
-        <file>main.qml</file>
-        <file>statsPage.qml</file>
-        <file>Storage.qml</file>
-        <file>Triangle.qml</file>
-        <file>Triangles.qml</file>
-        <file>Page.qml</file>
+        <file>qml/aboutPage.qml</file>
+        <file>qml/CoverPage.qml</file>
+        <file>qml/GamePage.qml</file>
+        <file>qml/harbour-sailyfish.qml</file>
+        <file>qml/itemBubble.qml</file>
+        <file>qml/itemPipe.qml</file>
+        <file>qml/statsPage.qml</file>
+        <file>qml/Storage.qml</file>
+        <file>qml/Triangle.qml</file>
+        <file>qml/Triangles.qml</file>
+        <file>qml/Page.qml</file>
+        <file>qml/Theme.qml</file>
     </qresource>
 </RCC>
