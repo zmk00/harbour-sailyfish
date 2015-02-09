@@ -188,6 +188,7 @@ Page{
         if (best > storage.getSetting("best"))
             storage.setSetting("best", best)
         settingBest = 0
+        updateSettings()
 
         var pipe         = pipeHolder.children[0]
         settingDistance += page.width - pipe.x
