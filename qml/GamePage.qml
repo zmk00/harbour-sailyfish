@@ -15,8 +15,8 @@ Page{
     }
 
     property bool paused:    false
-    property bool appActive: applicationActive
-    onAppActiveChanged: if (!appActive && alive) paused = true
+    //property bool appActive: applicationActive
+    //onAppActiveChanged: if (!appActive && alive) paused = true
 
     property double velo:  0
     property double grav:  9.8
@@ -102,6 +102,13 @@ Page{
         storage.setSetting("total",     storage.getSetting("total")    +settingTotal)
         storage.setSetting("distance",  storage.getSetting("distance") +settingDistance)
         storage.setSetting("bubbles",   storage.getSetting("bubbles")  +settingBubbles)
+
+        settingTime     = 0
+        settingRestarts = 0
+        settingJumps    = 0
+        settingTotal    = 0
+        settingDistance = 0
+        settingBubbles  = 0
     }
 
     function restart(){
@@ -328,32 +335,12 @@ Page{
         contentHeight: page.height
         contentWidth:  page.width
 
-//Need a new menu
-/*        PullDownMenu{
+        TopMenu{
+            id: topMenu
 
-            enabled:     !alive
-            quickSelect: false
-
-
-            MenuItem{
-
-                text:    "About"
-
-                onClicked: pageStack.push("aboutPage.qml")
-            }
-
-            MenuItem{
-
-                text: "Local stats"
-
-                onClicked:{
-
-                    updateSettings()
-                    pageStack.push("statsPage.qml")
-                }
-            }
+            property bool show: !alive
+            property bool back: false
         }
-*/
 
         Item{
             id: player
@@ -648,6 +635,7 @@ Page{
             id: labels
 
             width: page.width
+            y:     topMenu.y+topMenu.height
 
             Label{
                 id: labelScore

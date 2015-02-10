@@ -8,11 +8,18 @@ Rectangle{
         id: theme
     }
 
+    Label{
+
+        text:           "Are you sure you want to exit?"
+        color:          theme.primaryColor
+        font.pixelSize: theme.fontSizeMedium
+    }
+
     //Enable pagestack transitions (no anchors)
     width:  parent.width
     height: parent.height
 
-    color: theme.backgroundColor
+    color: "#45000000"
 
     //Enable android backbutton
     focus: true
@@ -20,12 +27,7 @@ Rectangle{
 
         if (event.key === Qt.Key_Back){
 
-            if (pageStack.currentItem !== pageStack.initialItem)
-                pageStack.pop()
-
-            else
-                pageStack.push({item: Qt.resolvedUrl("qrc:/qml/confirmExit.qml"), immediate: true})
-
+            pageStack.pop({immediate: true})
             event.accepted = true
         }
     }

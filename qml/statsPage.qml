@@ -1,17 +1,22 @@
-import QtQuick         2.0
-import Sailfish.Silica 1.0
+import QtQuick          2.0
+import QtQuick.Controls 1.3
+import "qrc:/qml/"
 
 Page{
     id: statPage
 
     Component.onDestruction: anchors.centerIn = undefined //to get rid of "../Silica/Page.qml:134: TypeError: Cannot read property of null"
 
+    Theme{
+        id: theme
+    }
+
     Storage{
         id: storage
     }
 
-    property bool appActive: appWindow.applicationActive
-    onAppActiveChanged: if (!appActive) scoreCover = storage.getSetting("cover")
+//    property bool appActive: appWindow.applicationActive
+//    onAppActiveChanged: if (!appActive) scoreCover = storage.getSetting("cover")
 
     property int  scoreHigh
     property int  scoreTotal
@@ -55,72 +60,80 @@ Page{
         reset = !reset
     }
 
-    SilicaFlickable{
+    Flickable{
 
         anchors.fill: parent
 
-        contentHeight: (mainCol.y + mainCol.height) + Theme.paddingLarge
+        contentHeight: (mainCol.y + mainCol.height) + theme.paddingLarge
 
-        VerticalScrollDecorator{}
+//        VerticalScrollDecorator{}
+//
+//        PullDownMenu{
+//
+//            visible: statPage.backNavigation
+//
+//            MenuItem{
+//
+//                text:      "Reset all stats"
+//                onClicked:{
+//
+//                    statPage.backNavigation = false
+//                    remorseItem.execute(remorseHolder, "Resetting stats")
+//                }
+//            }
+//        }
 
-        PullDownMenu{
+//        Item{
+//            id: remorseHolder
+//
+//            width:  parent.width
+//            height: theme.itemSizeLarge
+//        }
 
-            visible: statPage.backNavigation
+//        PageHeader{
+//            id: head
+//
+//            title: "Stats"
+//        }
+//
+//        RemorseItem{
+//            id: remorseItem
+//
+//            onCanceled: statPage.backNavigation = true
+//
+//            onTriggered:{
+//
+//                storage.setSetting("highscore", 0)
+//                storage.setSetting("jumps",     0)
+//                storage.setSetting("time",      0)
+//                storage.setSetting("distance",  0)
+//                storage.setSetting("restarts",  0)
+//                storage.setSetting("total",     0)
+//                storage.setSetting("bubbles",   0)
+//                storage.setSetting("best",      0)
+//                storage.setSetting("cover",     0)
+//
+//                resetHighscore = !resetHighscore
+//                updateStats()
+//
+//                statPage.backNavigation = true
+//            }
+//        }
 
-            MenuItem{
-
-                text:      "Reset all stats"
-                onClicked:{
-
-                    statPage.backNavigation = false
-                    remorseItem.execute(remorseHolder, "Resetting stats")
-                }
-            }
-        }
-
-        Item{
-            id: remorseHolder
-
-            width:  parent.width
-            height: Theme.itemSizeLarge
-        }
-
-        PageHeader{
+        TopMenu{
             id: head
 
-            title: "Stats"
-        }
-
-        RemorseItem{
-            id: remorseItem
-
-            onCanceled: statPage.backNavigation = true
-
-            onTriggered:{
-
-                storage.setSetting("highscore", 0)
-                storage.setSetting("jumps",     0)
-                storage.setSetting("time",      0)
-                storage.setSetting("distance",  0)
-                storage.setSetting("restarts",  0)
-                storage.setSetting("total",     0)
-                storage.setSetting("bubbles",   0)
-                storage.setSetting("best",      0)
-                storage.setSetting("cover",     0)
-
-                resetHighscore = !resetHighscore
-                updateStats()
-
-                statPage.backNavigation = true
-            }
+            property bool show: true
+            property bool back: true
         }
 
         Column{
             id: mainCol
 
             anchors.top:              head.bottom
+            anchors.topMargin:        theme.paddingLarge
             anchors.horizontalCenter: parent.horizontalCenter
-            width:                    parent.width - Theme.paddingLarge *2
+            width:                    parent.width - theme.paddingLarge *2
 
             Column{
 
@@ -130,13 +143,13 @@ Page{
 
                     text: "Score"
 
-                    color:          Theme.highlightColor
-                    font.pixelSize: Theme.fontSizeLarge
+                    color:          theme.highlightColor
+                    font.pixelSize: theme.fontSizeLarge
                 }
 
                 Row{
 
-                    spacing: Theme.paddingLarge
+                    spacing: theme.paddingLarge
 
                     Column{
 
@@ -145,8 +158,8 @@ Page{
 
                             text: scoreHigh
 
-                            color:          Theme.primaryColor
-                            font.pixelSize: Theme.fontSizeLarge
+                            color:          theme.primaryColor
+                            font.pixelSize: theme.fontSizeLarge
 
                             anchors.horizontalCenter: parent.horizontalCenter
                         }
@@ -164,8 +177,8 @@ Page{
                                     return scoreAverage.toFixed(2)
                             }
 
-                            color:          Theme.primaryColor
-                            font.pixelSize: Theme.fontSizeLarge
+                            color:          theme.primaryColor
+                            font.pixelSize: theme.fontSizeLarge
 
                             anchors.horizontalCenter: parent.horizontalCenter
                         }
@@ -174,8 +187,8 @@ Page{
 
                             text: scoreTotal
 
-                            color:          Theme.primaryColor
-                            font.pixelSize: Theme.fontSizeLarge
+                            color:          theme.primaryColor
+                            font.pixelSize: theme.fontSizeLarge
 
                             anchors.horizontalCenter: parent.horizontalCenter
                         }
@@ -183,14 +196,14 @@ Page{
 
                     Column{
 
-                        width: statPage.width - (parent.spacing + Math.ceil(parent.children[0].width) + parent.parent.parent.x + Theme.paddingLarge)
+                        width: statPage.width - (parent.spacing + Math.ceil(parent.children[0].width) + parent.parent.parent.x + theme.paddingLarge)
 
                         Label{
 
                             text: "Highscore"
 
-                            color:          Theme.secondaryColor
-                            font.pixelSize: Theme.fontSizeMedium
+                            color:          theme.secondaryColor
+                            font.pixelSize: theme.fontSizeMedium
 
                             height:            heightHelper.height
                             verticalAlignment: Text.AlignVCenter
@@ -203,8 +216,8 @@ Page{
 
                             text: "Average"
 
-                            color:          Theme.secondaryColor
-                            font.pixelSize: Theme.fontSizeMedium
+                            color:          theme.secondaryColor
+                            font.pixelSize: theme.fontSizeMedium
 
                             height:            heightHelper.height
                             verticalAlignment: Text.AlignVCenter
@@ -217,8 +230,8 @@ Page{
 
                             text: "Total"
 
-                            color:          Theme.secondaryColor
-                            font.pixelSize: Theme.fontSizeMedium
+                            color:          theme.secondaryColor
+                            font.pixelSize: theme.fontSizeMedium
 
                             height:            heightHelper.height
                             verticalAlignment: Text.AlignVCenter
@@ -232,20 +245,20 @@ Page{
                 //spacing
                 Item{
 
-                    height: Theme.paddingLarge; width: 1
+                    height: theme.paddingLarge; width: 1
                 }
 
                 Label{
 
                     text: "Primary"
 
-                    color:          Theme.highlightColor
-                    font.pixelSize: Theme.fontSizeLarge
+                    color:          theme.highlightColor
+                    font.pixelSize: theme.fontSizeLarge
                 }
 
                 Row{
 
-                    spacing: Theme.paddingLarge
+                    spacing: theme.paddingLarge
 
                     Column{
 
@@ -253,8 +266,8 @@ Page{
 
                             text: statJumps
 
-                            color:          Theme.primaryColor
-                            font.pixelSize: Theme.fontSizeLarge
+                            color:          theme.primaryColor
+                            font.pixelSize: theme.fontSizeLarge
 
                             anchors.horizontalCenter: parent.horizontalCenter
                         }
@@ -263,8 +276,8 @@ Page{
 
                             text: statBubbles
 
-                            color:          Theme.primaryColor
-                            font.pixelSize: Theme.fontSizeLarge
+                            color:          theme.primaryColor
+                            font.pixelSize: theme.fontSizeLarge
 
                             anchors.horizontalCenter: parent.horizontalCenter
                         }
@@ -273,8 +286,8 @@ Page{
 
                             text: statRestarts
 
-                            color:          Theme.primaryColor
-                            font.pixelSize: Theme.fontSizeLarge
+                            color:          theme.primaryColor
+                            font.pixelSize: theme.fontSizeLarge
 
                             anchors.horizontalCenter: parent.horizontalCenter
                         }
@@ -291,8 +304,8 @@ Page{
                                     return statTime
                             }
 
-                            color:          Theme.primaryColor
-                            font.pixelSize: Theme.fontSizeLarge
+                            color:          theme.primaryColor
+                            font.pixelSize: theme.fontSizeLarge
 
                             anchors.horizontalCenter: parent.horizontalCenter
                         }
@@ -310,8 +323,8 @@ Page{
                                     return statDistance.toFixed(1)
                             }
 
-                            color:          Theme.primaryColor
-                            font.pixelSize: Theme.fontSizeLarge
+                            color:          theme.primaryColor
+                            font.pixelSize: theme.fontSizeLarge
 
                             anchors.horizontalCenter: parent.horizontalCenter
                         }
@@ -320,8 +333,8 @@ Page{
 
                             text: statBest != null ? statBest : 0
 
-                            color:          Theme.primaryColor
-                            font.pixelSize: Theme.fontSizeLarge
+                            color:          theme.primaryColor
+                            font.pixelSize: theme.fontSizeLarge
 
                             anchors.horizontalCenter: parent.horizontalCenter
                         }
@@ -329,14 +342,14 @@ Page{
 
                     Column{
 
-                        width: statPage.width - (parent.spacing + Math.ceil(parent.children[0].width) + parent.parent.parent.x + Theme.paddingLarge)
+                        width: statPage.width - (parent.spacing + Math.ceil(parent.children[0].width) + parent.parent.parent.x + theme.paddingLarge)
 
                         Label{
 
                             text: "Jumps"
 
-                            color:          Theme.secondaryColor
-                            font.pixelSize: Theme.fontSizeMedium
+                            color:          theme.secondaryColor
+                            font.pixelSize: theme.fontSizeMedium
 
                             height:            heightHelper.height
                             verticalAlignment: Text.AlignVCenter
@@ -349,8 +362,8 @@ Page{
 
                             text: "Bubbles popped"
 
-                            color: Theme.secondaryColor
-                            font.pixelSize: Theme.fontSizeMedium
+                            color: theme.secondaryColor
+                            font.pixelSize: theme.fontSizeMedium
 
                             height:            heightHelper.height
                             verticalAlignment: Text.AlignVCenter
@@ -363,8 +376,8 @@ Page{
 
                             text: "Restarts"
 
-                            color:          Theme.secondaryColor
-                            font.pixelSize: Theme.fontSizeMedium
+                            color:          theme.secondaryColor
+                            font.pixelSize: theme.fontSizeMedium
 
                             height:            heightHelper.height
                             verticalAlignment: Text.AlignVCenter
@@ -377,8 +390,8 @@ Page{
 
                             text: statTime >= 120 ? "Minutes played" : "Seconds played"
 
-                            color:          Theme.secondaryColor
-                            font.pixelSize: Theme.fontSizeMedium
+                            color:          theme.secondaryColor
+                            font.pixelSize: theme.fontSizeMedium
 
                             height:            heightHelper.height
                             verticalAlignment: Text.AlignVCenter
@@ -391,8 +404,8 @@ Page{
 
                             text: statDistance >= 100 ? "Distance traveled in meters" : "Distance traveled in cm"
 
-                            color:          Theme.secondaryColor
-                            font.pixelSize: Theme.fontSizeMedium
+                            color:          theme.secondaryColor
+                            font.pixelSize: theme.fontSizeMedium
 
                             height:            heightHelper.height
                             verticalAlignment: Text.AlignVCenter
@@ -405,8 +418,8 @@ Page{
 
                             text: "Best run (bubbles + score)"
 
-                            color:          Theme.secondaryColor
-                            font.pixelSize: Theme.fontSizeMedium
+                            color:          theme.secondaryColor
+                            font.pixelSize: theme.fontSizeMedium
 
                             height:            heightHelper.height
                             verticalAlignment: Text.AlignVCenter
@@ -420,7 +433,7 @@ Page{
                 //spacing
                 Item{
 
-                    height: Theme.paddingLarge; width: 1
+                    height: theme.paddingLarge; width: 1
                 }
 
 
@@ -428,13 +441,13 @@ Page{
 
                     text: "Secondary"
 
-                    color:          Theme.highlightColor
-                    font.pixelSize: Theme.fontSizeLarge
+                    color:          theme.highlightColor
+                    font.pixelSize: theme.fontSizeLarge
                 }
 
                 Row{
 
-                    spacing: Theme.paddingLarge
+                    spacing: theme.paddingLarge
 
                     Column{
 
@@ -442,8 +455,8 @@ Page{
 
                             text: statTime > 0 ? (statJumps / (statTime / 60)).toFixed(1) : 0
 
-                            color:          Theme.primaryColor
-                            font.pixelSize: Theme.fontSizeLarge
+                            color:          theme.primaryColor
+                            font.pixelSize: theme.fontSizeLarge
 
                             anchors.horizontalCenter: parent.horizontalCenter
                         }
@@ -452,8 +465,8 @@ Page{
 
                             text: statBubbles > 0 ? (statBubbles / (statTime /60)).toFixed(2) : 0
 
-                            color:          Theme.primaryColor
-                            font.pixelSize: Theme.fontSizeLarge
+                            color:          theme.primaryColor
+                            font.pixelSize: theme.fontSizeLarge
 
                             anchors.horizontalCenter: parent.horizontalCenter
                         }
@@ -462,8 +475,8 @@ Page{
 
                             text: statBubbles > 0 ? (scoreTotal > 0 ? (statBubbles /scoreTotal).toFixed(2) : 0) : 0
 
-                            color:          Theme.primaryColor
-                            font.pixelSize: Theme.fontSizeLarge
+                            color:          theme.primaryColor
+                            font.pixelSize: theme.fontSizeLarge
 
                             anchors.horizontalCenter: parent.horizontalCenter
                         }
@@ -473,8 +486,8 @@ Page{
 
                             text: statRestarts > 0 ? (statTime / statRestarts).toFixed(1) : 0
 
-                            color:          Theme.primaryColor
-                            font.pixelSize: Theme.fontSizeLarge
+                            color:          theme.primaryColor
+                            font.pixelSize: theme.fontSizeLarge
 
                             anchors.horizontalCenter: parent.horizontalCenter
                         }
@@ -483,8 +496,8 @@ Page{
 
                             text: scoreCover > 0 ? scoreCover : 0
 
-                            color:          Theme.primaryColor
-                            font.pixelSize: Theme.fontSizeLarge
+                            color:          theme.primaryColor
+                            font.pixelSize: theme.fontSizeLarge
 
                             anchors.horizontalCenter: parent.horizontalCenter
                         }
@@ -492,14 +505,14 @@ Page{
 
                     Column{
 
-                        width: statPage.width - (parent.spacing + Math.ceil(parent.children[0].width) + parent.parent.parent.x + Theme.paddingLarge)
+                        width: statPage.width - (parent.spacing + Math.ceil(parent.children[0].width) + parent.parent.parent.x + theme.paddingLarge)
 
                         Label{
 
                             text: "Jumps per minute"
 
-                            color:          Theme.secondaryColor
-                            font.pixelSize: Theme.fontSizeMedium
+                            color:          theme.secondaryColor
+                            font.pixelSize: theme.fontSizeMedium
 
                             height:            heightHelper.height
                             verticalAlignment: Text.AlignVCenter
@@ -512,8 +525,8 @@ Page{
 
                             text: "Bubbles popped per minute"
 
-                            color:          Theme.secondaryColor
-                            font.pixelSize: Theme.fontSizeMedium
+                            color:          theme.secondaryColor
+                            font.pixelSize: theme.fontSizeMedium
 
                             height:            heightHelper.height
                             verticalAlignment: Text.AlignVCenter
@@ -526,8 +539,8 @@ Page{
 
                             text: "Bubbles per score"
 
-                            color:          Theme.secondaryColor
-                            font.pixelSize: Theme.fontSizeMedium
+                            color:          theme.secondaryColor
+                            font.pixelSize: theme.fontSizeMedium
 
                             height:            heightHelper.height
                             verticalAlignment: Text.AlignVCenter
@@ -541,8 +554,8 @@ Page{
 
                             text: "Average lifetime in seconds"
 
-                            color:          Theme.secondaryColor
-                            font.pixelSize: Theme.fontSizeMedium
+                            color:          theme.secondaryColor
+                            font.pixelSize: theme.fontSizeMedium
 
                             height:            heightHelper.height
                             verticalAlignment: Text.AlignVCenter
@@ -555,8 +568,8 @@ Page{
 
                             text: "Cover score"
 
-                            color:          Theme.secondaryColor
-                            font.pixelSize: Theme.fontSizeMedium
+                            color:          theme.secondaryColor
+                            font.pixelSize: theme.fontSizeMedium
 
                             height:            heightHelper.height
                             verticalAlignment: Text.AlignVCenter

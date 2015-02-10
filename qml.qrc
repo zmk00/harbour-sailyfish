@@ -12,5 +12,7 @@
         <file>qml/Triangles.qml</file>
         <file>qml/Page.qml</file>
         <file>qml/Theme.qml</file>
+        <file>qml/TopMenu.qml</file>
+        <file>qml/confirmExit.qml</file>
     </qresource>
 </RCC>
